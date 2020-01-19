@@ -38,7 +38,7 @@ module.exports = {
             { test: /\.less$/, use: ['style-loader', 'css-loader', 'less-loader'] }, //配置处理.less的第三方loader规则
             { test: /\.scss$/, use: ['style-loader', 'css-loader', 'sass-loader'] },
             { test: /\.(jpg|png|gif|bmp|jpeg)$/, use: ['url-loader?limit=7631'] }, //处理图片的loader
-
+            { test: /\.(ttf|svg|eot|woff|woff2)$/, use: ['url-loader'] }, //处理字体文件的loader
             { test: /\.vue$/, use: 'vue-loader' },
             { test: /\.js$/, use: 'babel-loader', exclude: /node_modules/ } // 配置babel来转换高级的es6语法
         ]
