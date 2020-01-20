@@ -47,6 +47,7 @@
     padding-top: 40px;
 	/* 解决X轴超出出现滚动条问题 */
 	overflow-x: hidden;
+	padding-bottom: 50px;
 	
   }
   /* 解决从右侧进入从左侧出去问题，position:absolute解决上自下往上颤动问题 */
