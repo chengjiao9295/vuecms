@@ -18,15 +18,26 @@ Vue.http.options.root = 'http://vue.studyit.io/';
 Vue.http.options.emulateJSON = true;
 import router from './router.js'
 
-import { Header, Swipe, SwipeItem, Button } from 'mint-ui';
-Vue.component(Header.name, Header);
-Vue.component(Swipe.name, Swipe);
-Vue.component(SwipeItem.name, SwipeItem);
-Vue.component(Button.name, Button);
+// 按需加载
+// import { Header, Swipe, SwipeItem, Button,Lazyload } from 'mint-ui';
+// Vue.component(Header.name, Header);
+// Vue.component(Swipe.name, Swipe);
+// Vue.component(SwipeItem.name, SwipeItem);
+// Vue.component(Button.name, Button);
+
+// Vue.use(Lazyload);//使用按需加载那个加载图标显示不了，需要使用全部加载的方式
+
+// 全部加载,
+import MintUI from 'mint-ui';
+Vue.use(MintUI);
+import 'mint-ui/lib/style.css';
 
 // 导入mui的样式表，好导入bootstrap一样
 import './lib/mui/css/mui.min.css';
 import './lib/mui/css/icons-extra.css';
+
+import VuePreview from 'vue-preview'
+Vue.use(VuePreview);
 
 // 导入时间插件
 import moment from 'moment'
