@@ -1,6 +1,6 @@
 <template>
     <div class="goods-list">
-        <div class="goods-item">
+        <div class="goods-item"  @click="goDetail(1)">
             <img src="https://img10.360buyimg.com/n1/s450x450_jfs/t1/88690/35/10735/141036/5e22b34dEa6f8c9a9/cdb5a7d1dfbeca8d.jpg" alt="">
             <h1 class="title">华为荣耀20s华为荣耀20s华为荣耀20s华为荣耀20s</h1>
             <div class="info">
@@ -15,7 +15,7 @@
                 </p>
             </div>
         </div>
-        <div class="goods-item">
+        <div class="goods-item"  @click="goDetail(1)">
             <img src="https://img10.360buyimg.com/n1/s450x450_jfs/t1/88690/35/10735/141036/5e22b34dEa6f8c9a9/cdb5a7d1dfbeca8d.jpg" alt="">
             <h1 class="title">华为荣耀20s</h1>
             <div class="info">
@@ -30,7 +30,7 @@
                 </p>
             </div>
         </div>
-        <div class="goods-item">
+        <div class="goods-item"  @click="goDetail(1)">
             <img src="https://img10.360buyimg.com/n1/s450x450_jfs/t1/88690/35/10735/141036/5e22b34dEa6f8c9a9/cdb5a7d1dfbeca8d.jpg" alt="">
             <h1 class="title">华为荣耀20s</h1>
             <div class="info">
@@ -45,11 +45,92 @@
                 </p>
             </div>
         </div>
+
+        <!-- <router-link to="'/home/goodsinfo'+item.id" tag="div" class="goods-item" v-for="item in goodslist" :key="item.id">
+            <img :src="item.img_url" alt="">
+            <h1 class="title">{{item.title}}</h1>
+            <div class="info">
+                <p class="price">
+                    <span class="now">￥{{item.sell_price}}</span>
+                    <span class="old">￥{{item.market_price}}</span>
+                </p>
+                <p class="sell">
+                    <span>热卖中</span>
+                    <span>剩{{item.stock_quantity}}件</span>
+
+                </p>
+            </div>
+        </router-link> -->
+
+
+        <!-- 在网页中，有两种跳转方式 -->
+        <!-- 方式1：使用a标签的形式叫做标签跳转 -->
+        <!-- 方式2：使用window.location.href 的形式，叫做编程式导航 -->
+        <div  class="goods-item" v-for="item in goodslist" :key="item.id"
+        @click="goDetail(item.id)">
+            <img :src="item.img_url" alt="">
+            <h1 class="title">{{item.title}}</h1>
+            <div class="info">
+                <p class="price">
+                    <span class="now">￥{{item.sell_price}}</span>
+                    <span class="old">￥{{item.market_price}}</span>
+                </p>
+                <p class="sell">
+                    <span>热卖中</span>
+                    <span>剩{{item.stock_quantity}}件</span>
+
+                </p>
+            </div>
+        </div>
+        <mt-button type="danger" size="large" @click = "getMore">加载更多</mt-button>
     </div>
 </template>
 
 <script>
 export default{
+    data(){
+        // data 是往自己组件内部，挂载一些私有数据的
+        return {
+            pageindex: 1, //分页的页数
+            goodslist: [], // 存放商品列表的数组
+        }
+    },
+    created(){
+        //this.getGoodsList();
+    },
+    methods:{
+        getGoodsList(){
+            // 获取商品列表
+            this.$http.get('api/getgoods?pageindex=' +this.pageindex)
+            .then(result=>{
+                if(result.body.status === 0){
+                    this.goodslist =  this.goodslist.concat(result.body.message);
+                }
+            })
+        },
+        getMore(){
+            this.pageindex++;
+            this.getGoodsList();
+        },
+        goDetail(id){
+            // 使用js的形式进行路由导航
+            // 注意： 一定要区分this.$route 和this.$router 这两个对象
+            // 其中：this.$route 是路由参数对象，所有路由中的参数，params， query
+            // 都属于它
+            // 其中： this.$router 是一个路由导航对象，用它可以方便的使用js代码，实现路由的前进
+            // 后退，跳转到新的url地址
+
+            // 1. 最简单的
+           // this.$router.push("/home/goodsinfo/" + id);
+            // 2. 传递对象
+            //this.$router.push({path: "/home/goodsinfo" + id});
+            // 3. 使用命名的路由,对应的name需要在路由规则匹配中添加name属性，然后
+            // 这里便可以用这个名字来查找对应的路由
+            //this.$router.push({name: "goodsinfo", params: {id}});
+            this.$router.push("/home/goodsinfo");
+
+        }
+    }
 
 }
 </script>

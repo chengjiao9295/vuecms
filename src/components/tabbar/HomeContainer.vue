@@ -2,11 +2,19 @@
     <div>
         <!-- <h1>HomeContainer</h1> -->
         <mt-swipe :auto="2000">
-            <mt-swipe-item>1</mt-swipe-item>
+            <mt-swipe-item>
+                <img src="https://img10.360buyimg.com/n1/s450x450_jfs/t1/88690/35/10735/141036/5e22b34dEa6f8c9a9/cdb5a7d1dfbeca8d.jpg" alt="" class="src">
+            </mt-swipe-item>
             <mt-swipe-item>2</mt-swipe-item>
             <mt-swipe-item>3</mt-swipe-item>
         </mt-swipe>
-        <!-- <mt-swipe :auto="2000">
+
+        <!-- 轮播图区域 -->
+       <!-- <swiper :lunbotuList="lunbotuList" :isfull="true"></swipter> -->
+        
+       <!-- 或 -->
+       
+       <!-- <mt-swipe :auto="2000">
            //在组件中，使用v-for循环的话，一定要使用key 
             <mt-swipe-item v-for="item in lunboList" :key="item.url">
                 <img :src="item.img" alt="">
@@ -57,6 +65,7 @@
 
 <script>
 import {Toast} from 'mint-ui'
+import swiper from '../subcomponents/swiper.vue'
 export default{
     data(){
         return {
@@ -78,7 +87,11 @@ export default{
                 }
             })
         }
-    }
+    },
+    components:{
+        swiper
+    },
+ 
 }
 </script>
 

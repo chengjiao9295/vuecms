@@ -15,7 +15,7 @@
       // "@babel/plugin-transform-strict-mode"
     ],
     "ignore": [
-        "./src/lib/mui/js/mui.js"  // 建了lib文件夹，存放mui相关文件
+        "./src/lib/mui/js/*.js"  // 建了lib文件夹，存放mui相关文件
         // https://segmentfault.com/a/1190000017558699?utm_source=tag-newest
         // https://www.cnblogs.com/sweetworld/p/11368569.html
     ]
